@@ -1,3 +1,4 @@
+#問題1
 import random
 print("問題:")
 question_list = [0, 1, 2]
