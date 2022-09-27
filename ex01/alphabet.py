@@ -15,6 +15,13 @@ for j in range(8):
     print(chr_list.pop(list_number), end = " ")
 
 print('\n')
-print(chr_list)
+print(len(chr_list))
 #print("まだ完成してません")
-answer = input("欠損文字はいくつあるでしょうか？:")
+flag_num = 0
+while (flag_num == 0):
+    answer = input("欠損文字はいくつあるでしょうか？:")
+    if (len(chr_list) == answer):
+        input("正解です。では、その欠損文字は？:")
+        break
+    else:
+        print("不正解です。やりなおし。")
