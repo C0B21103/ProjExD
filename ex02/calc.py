@@ -8,9 +8,9 @@ def click_number(event): #イベント発生時に呼び出される関数(こ�
     #tkm.showinfo(f"{num}", f"{num}のボタンが押されました")
     entry.insert(tk.END, num) #位置に文字列を挿入、tkinter.ENDで位置を入力欄の末尾にする
 
-def click_equal(event):
-    eqn = entry.get()
-    res = eval(eqn)
+def click_equal(event): #イベント発生時に呼び出される関数(ここではイコールボタンが押されたとき)
+    eqn = entry.get() #入力された式を参照
+    res = eval(eqn) #式を計算(四則演算が可能な事は確認済み)
     entry.delete(0, tk.END)
     entry.insert(tk.END, res)
 root = tk.Tk() # Tk()ウィンドウウィジェットの作成
