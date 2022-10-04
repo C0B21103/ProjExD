@@ -24,6 +24,7 @@ def click_percent(event):
     peres = pe * 0.01
     entry.delete(0, tk.END)
     entry.insert(tk.END, peres)
+    
 #テキスト入力欄
 r, c = 0, 0
 entry = tk.Entry(root, width=10, font=(", 40"), justify="right") # 練習4
@@ -37,11 +38,11 @@ r, c = 1, 0 # r: 行を表す変数／c：列を表す変数
 #numbers = list(range(9, -1, -1)) #[9,8,7,6,5,4,3,2,1,0]のリストを作成
 #operators = ["+","-","*","/"] #演算子のリスト
 BUTTON=[
-    ["C", "()", "%", "/"],
+    ["(", ")", "%", "/"],
     ["7", "8", "9", "*"],
     ["4", "5", "6", "-"],
     ["1", "2", "3", "+"],
-    ["", "0", "."]
+    ["C", "0", "."]
 ]
 
 for i in BUTTON:
