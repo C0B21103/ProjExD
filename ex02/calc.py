@@ -18,6 +18,12 @@ root.geometry("300x500")#インスタンスメソッド、ウィンドウのサ�
 
 def click_c(event):
     entry.delete(0, tk.END)
+    
+def click_percent(event):
+    pe = int(entry.get())
+    peres = pe * 0.01
+    entry.delete(0, tk.END)
+    entry.insert(tk.END, peres)
 #テキスト入力欄
 r, c = 0, 0
 entry = tk.Entry(root, width=10, font=(", 40"), justify="right") # 練習4
@@ -44,6 +50,8 @@ for i in BUTTON:
         btn = tk.Button(root, text=f"{num}", font=("", 30), width=4, height=2)
         if (num == "C"):
             btn.bind("<1>", click_c)
+        elif (num == "%"):
+            btn.bind("<1>", click_percent)
         else:
             btn.bind("<1>", click_number)
         btn.grid(row=r, column=c)
