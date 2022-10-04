@@ -16,6 +16,8 @@ def click_equal(event):
 root = tk.Tk() # Tk()ウィンドウウィジェットの作成
 root.geometry("300x500")#インスタンスメソッド、ウィンドウのサイズを設定する
 
+def click_c(event):
+    entry.delete(0, tk.END)
 #テキスト入力欄
 r, c = 0, 0
 entry = tk.Entry(root, width=10, font=(", 40"), justify="right") # 練習4
@@ -35,12 +37,15 @@ BUTTON=[
     ["1", "2", "3", "+"],
     ["", "0", "."]
 ]
-#for i, num in enumerate(BUTTON, 1):
+
 for i in BUTTON:
     for j in range(len(i)):
         num = i[j]    
         btn = tk.Button(root, text=f"{num}", font=("", 30), width=4, height=2)
-        btn.bind("<1>", click_number)
+        if (num == "C"):
+            btn.bind("<1>", click_c)
+        else:
+            btn.bind("<1>", click_number)
         btn.grid(row=r, column=c)
         c += 1
         if j == 3:
