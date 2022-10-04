@@ -16,6 +16,8 @@ def click_equal(event):
 root = tk.Tk() # Tk()ウィンドウウィジェットの作成
 root.geometry("300x500")#インスタンスメソッド、ウィンドウのサイズを設定する
 
+def click_c(event):
+    entry.delete(0, tk.END)
 #テキスト入力欄
 r, c = 0, 0
 entry = tk.Entry(root, width=10, font=(", 40"), justify="right") # 練習4
@@ -26,16 +28,29 @@ entry.grid(row=0, column=0, columnspan=3)
 
 #0~9のボタン
 r, c = 1, 0 # r: 行を表す変数／c：列を表す変数
-numbers = list(range(9, -1, -1)) #[9,8,7,6,5,4,3,2,1,0]のリストを作成
-operators = ["+"] #演算子のリスト
-for i, num in enumerate(numbers+operators, 1):
-    btn = tk.Button(root, text=f"{num}", font=("", 30), width=4, height=2)
-    btn.bind("<1>", click_number)
-    btn.grid(row=r, column=c)
-    c += 1
-    if i%3 == 0:
-        r += 1
-        c = 0
+#numbers = list(range(9, -1, -1)) #[9,8,7,6,5,4,3,2,1,0]のリストを作成
+#operators = ["+","-","*","/"] #演算子のリスト
+BUTTON=[
+    ["C", "()", "%", "/"],
+    ["7", "8", "9", "*"],
+    ["4", "5", "6", "-"],
+    ["1", "2", "3", "+"],
+    ["", "0", "."]
+]
+
+for i in BUTTON:
+    for j in range(len(i)):
+        num = i[j]    
+        btn = tk.Button(root, text=f"{num}", font=("", 30), width=4, height=2)
+        if (num == "C"):
+            btn.bind("<1>", click_c)
+        else:
+            btn.bind("<1>", click_number)
+        btn.grid(row=r, column=c)
+        c += 1
+        if j == 3:
+            r += 1
+            c = 0
 
 btn = tk.Button(root, text = f"=", font=("", 30), width = 4, height = 2)
 btn.bind("<1>", click_equal)
