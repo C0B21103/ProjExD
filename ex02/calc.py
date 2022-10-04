@@ -7,6 +7,12 @@ def click_number(event): #イベント発生時に呼び出される関数(こ�
     num = btn["text"] #numはさらにそのウィジェットのテキスト属性の値を表す
     #tkm.showinfo(f"{num}", f"{num}のボタンが押されました")
     entry.insert(tk.END, num) #位置に文字列を挿入、tkinter.ENDで位置を入力欄の末尾にする
+
+def click_equal(event):
+    eqn = entry.get()
+    res = eval(eqn)
+    entry.delete(0, tk.END)
+    entry.insert(tk.END, res)
 root = tk.Tk() # Tk()ウィンドウウィジェットの作成
 root.geometry("300x500")#インスタンスメソッド、ウィンドウのサイズを設定する
 
@@ -30,4 +36,8 @@ for i, num in enumerate(numbers+operators, 1):
     if i%3 == 0:
         r += 1
         c = 0
+
+btn = tk.Button(root, text = f"=", font=("", 30), width = 4, height = 2)
+btn.bind("<1>", click_equal)
+btn.grid(row = r, column = c)
 root.mainloop()
