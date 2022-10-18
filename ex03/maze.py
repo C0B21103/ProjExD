@@ -10,9 +10,9 @@ import sys
 global mx, my, build, canvas, root, cx, cy
 
 
-root = tk.Tk()
-root.title("迷えるこうかとん")
-root.geometry("1500x900") 
+root = tk.Tk() #ウィンドウを生成
+root.title("迷えるこうかとん") #タイトル名
+root.geometry("1500x900") #ウィンドウのサイズ
 def initmake():
     global build, canvas, root, cx, cy, mx , my    
 
