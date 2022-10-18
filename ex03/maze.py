@@ -1,5 +1,6 @@
 from itertools import cycle
 import tkinter as tk
+import maze_maker
 
 root = tk.Tk()
 root.title("迷えるこうかとん")
@@ -24,6 +25,7 @@ canvas.create_image(cx, cy, image = tori, tag = "tori")
 key = ""
 
 #keysymで押されたキーの値を取得する
+#main_proc関数は矢印キーが入力されたときにのみ処理される
 def key_down(event):
     key = event.keysym
     main_proc(key)
@@ -36,6 +38,8 @@ def key_up(event):
 #KeyReleaseイベントと紐づけ    
 root.bind("<KeyRelease>", key_up)
 
+#押された矢印キーによって画像を移動させる関数
+#ウィンドウの端に来たら止まるようにする
 def main_proc(key):
     global cx, cy
     if (key == "Up"):
