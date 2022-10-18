@@ -1,5 +1,6 @@
 from itertools import cycle
 import tkinter as tk
+#maze_makerモジュールは迷路を生成するためのモジュール
 import maze_maker
 
 root = tk.Tk()
@@ -57,6 +58,12 @@ def main_proc(key):
     elif (key == "Right"):
         if(cx != 1500):
             cx += 20
-            canvas.coords("tori", cx, cy)          
+            canvas.coords("tori", cx, cy)     
+
+#maze_makerモジュールは迷路を生成するためのモジュール
+#maze_makerモジュールのmake_maze関数を呼び出す
+#第一引数：横方向のマス数、第二引数：縦方向のマス数
+#戻り値：第一引数ｘ第二引数の二次元リスト、要素「１」は壁で「０」は床を意味する
+build = maze_maker.make_maze(15, 9)     
 
 root.mainloop()
