@@ -8,11 +8,6 @@ import time
 
 
 #global mx, my, build, canvas, root, cx, cy, times, time_sta, time_end, tim
-times = 1
-
-root = tk.Tk() #ウィンドウを生成
-root.title("迷えるこうかとん") #タイトル名
-root.geometry("1500x900") #ウィンドウのサイズ
 def initmake():
     global build, canvas, root, cx, cy, mx , my, time_sta   
     #time_sta = time.time()
@@ -151,5 +146,10 @@ def temp_proc(key):
                 sys.exit()
             else:
                 canvas.delete("all")
-                initmake()     
+                initmake()
+times = 1
+
+root = tk.Tk() #ウィンドウを生成
+root.title("迷えるこうかとん") #タイトル名
+root.geometry("1500x900") #ウィンドウのサイズ 
 initmake()
