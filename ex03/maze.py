@@ -61,25 +61,29 @@ def main_proc(key):
     global cx, cy, mx, my
     if (key == "Up"):
         if(my != 0):
-            my -= 1
-            cy =50 + my * 100
-            canvas.coords("tori", cx, cy) 
+            if (build[my - 1][mx] == 0):
+                my -= 1
+                cy =50 + my * 100
+                canvas.coords("tori", cx, cy) 
     elif (key == "Down"):
         if(my !=8):
-            my += 1
-            cy = 50 + my * 100
-            canvas.coords("tori", cx, cy) 
+            if (build[my + 1][mx] == 0):
+                my += 1
+                cy = 50 + my * 100
+                canvas.coords("tori", cx, cy) 
     elif (key == "Left"):
         if(mx != 0):
-            mx -= 1
-            cx = 50 + mx * 100
-            canvas.coords("tori", cx, cy) 
+            if (build[my][mx - 1] == 0):
+                mx -= 1
+                cx = 50 + mx * 100
+                canvas.coords("tori", cx, cy) 
     elif (key == "Right"):
         if(mx != 14):
-            mx += 1
-            cx = 50 + mx * 100
-            canvas.coords("tori", cx, cy)     
+            if (build[my][mx + 1] == 0):
+                mx += 1
+                cx = 50 + mx * 100
+                canvas.coords("tori", cx, cy)     
 
-
+print(build)
 root.mainloop()
 
