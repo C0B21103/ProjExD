@@ -13,6 +13,13 @@ canvas = tk.Canvas(root, width = 1500, height = 900, bg = "black")
 #キャンバス配置
 canvas.place(x=0, y=0)
 
+#maze_makerモジュールは迷路を生成するためのモジュール
+#maze_makerモジュールのmake_maze関数を呼び出す
+#第一引数：横方向のマス数、第二引数：縦方向のマス数
+#戻り値：第一引数ｘ第二引数の二次元リスト、要素「１」は壁で「０」は床を意味する
+build = maze_maker.make_maze(15, 9)     
+maze_maker.show_maze(canvas, build)
+
 #こうかとんの画像のインスタンスを生成
 tori = tk.PhotoImage(file = "ex03/fig/0.png")
 #グローバル変数cx,cyは，こうかとんの現在地を表す変数である
@@ -60,10 +67,5 @@ def main_proc(key):
             cx += 20
             canvas.coords("tori", cx, cy)     
 
-#maze_makerモジュールは迷路を生成するためのモジュール
-#maze_makerモジュールのmake_maze関数を呼び出す
-#第一引数：横方向のマス数、第二引数：縦方向のマス数
-#戻り値：第一引数ｘ第二引数の二次元リスト、要素「１」は壁で「０」は床を意味する
-build = maze_maker.make_maze(15, 9)     
 
 root.mainloop()
