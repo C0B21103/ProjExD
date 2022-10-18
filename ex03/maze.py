@@ -7,8 +7,8 @@ import sys
 
 
 
-global mx, my, build, canvas, root, cx, cy
-
+global mx, my, build, canvas, root, cx, cy, times
+times = 1
 
 root = tk.Tk() #ウィンドウを生成
 root.title("迷えるこうかとん") #タイトル名
@@ -61,7 +61,10 @@ def initmake():
 #main_proc関数は矢印キーが入力されたときにのみ処理される
 def key_down(event):
     key = event.keysym
-    main_proc(key)
+    if times >= 3:
+        temp_proc(key)
+    else:
+        main_proc(key)
 
 
 #どのキーも押されていない時に呼び出す
@@ -70,9 +73,10 @@ def key_up(event):
 
 
 #押された矢印キーによって画像を移動させる関数
+#移動先が床(buildの要素が「0」の時)ならば移動する
 #ウィンドウの端に来たら止まるようにする
 def main_proc(key):
-    global cx, cy, mx, my
+    global cx, cy, mx, my, times
     if (key == "Up"):
         if(my != 0):
             if (build[my - 1][mx] == 0):
@@ -99,10 +103,47 @@ def main_proc(key):
                 canvas.coords("tori0", cx, cy)     
     if (mx == 13):
         if (my == 7):
+            times += 1
             ret = tkm.askyesno("クリアしました", "もう一度遊びますか？")
             if ret == False:
                 sys.exit()
             else:
                 canvas.delete("all")
                 initmake()
+                
+def temp_proc(key):
+    global cx, cy, mx, my, times
+    if (key == "Up"):
+        if(my != 0):
+            if (build[my + 1][mx] == 0):
+                my += 1
+                cy =50 + my * 100
+                canvas.coords("tori0", cx, cy) 
+    elif (key == "Down"):
+        if(my !=8):
+            if (build[my - 1][mx] == 0):
+                my -= 1
+                cy = 50 + my * 100
+                canvas.coords("tori0", cx, cy) 
+    elif (key == "Left"):
+        if(mx != 0):
+            if (build[my][mx + 1] == 0):
+                mx += 1
+                cx = 50 + mx * 100
+                canvas.coords("tori0", cx, cy) 
+    elif (key == "Right"):
+        if(mx != 14):
+            if (build[my][mx - 1] == 0):
+                mx -= 1
+                cx = 50 + mx * 100
+                canvas.coords("tori0", cx, cy)     
+    if (mx == 13):
+        if (my == 7):
+            times += 1
+            ret = tkm.askyesno("クリアしました", "もう一度遊びますか？")
+            if ret == False:
+                sys.exit()
+            else:
+                canvas.delete("all")
+                initmake()     
 initmake()
