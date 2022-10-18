@@ -3,6 +3,11 @@ import tkinter as tk
 #maze_makerモジュールは迷路を生成するためのモジュール
 import maze_maker
 
+
+
+global mx, my
+mx, my = 1, 1 
+    
 root = tk.Tk()
 root.title("迷えるこうかとん")
 root.geometry("1500x900")
@@ -24,10 +29,14 @@ maze_maker.show_maze(canvas, build)
 tori = tk.PhotoImage(file = "ex03/fig/0.png")
 #グローバル変数cx,cyは，こうかとんの現在地を表す変数である
 #cxは横座標,cyは縦座標
-global cx, cy
-cx, cy = 300, 400
+#global cx, cy
+#cx, cy = 300, 400
 #Canvasにおける横：300，縦：400䛾座標に表示
+
+cx = mx * 150
+cy = my * 150
 canvas.create_image(cx, cy, image = tori, tag = "tori")
+
 
 #変数keyを空文字""で初期化する
 key = ""
@@ -49,23 +58,28 @@ root.bind("<KeyRelease>", key_up)
 #押された矢印キーによって画像を移動させる関数
 #ウィンドウの端に来たら止まるようにする
 def main_proc(key):
-    global cx, cy
+    global cx, cy, mx, my
     if (key == "Up"):
-        if(cy != 0):
-            cy -=20
+        if(my != 0):
+            my -= 1
+            cy =50 + my * 100
             canvas.coords("tori", cx, cy) 
     elif (key == "Down"):
-        if(cy !=900):
-            cy += 20
+        if(my !=8):
+            my += 1
+            cy = 50 + my * 100
             canvas.coords("tori", cx, cy) 
     elif (key == "Left"):
-        if(cx != 0):
-            cx -= 20
+        if(mx != 0):
+            mx -= 1
+            cx = 50 + mx * 100
             canvas.coords("tori", cx, cy) 
     elif (key == "Right"):
-        if(cx != 1500):
-            cx += 20
+        if(mx != 14):
+            mx += 1
+            cx = 50 + mx * 100
             canvas.coords("tori", cx, cy)     
 
 
 root.mainloop()
+
