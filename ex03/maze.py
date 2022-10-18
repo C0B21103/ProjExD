@@ -7,7 +7,7 @@ import sys
 import time
 
 
-global mx, my, build, canvas, root, cx, cy, times, time_sta, time_end, tim
+#global mx, my, build, canvas, root, cx, cy, times, time_sta, time_end, tim
 times = 1
 
 root = tk.Tk() #ウィンドウを生成
