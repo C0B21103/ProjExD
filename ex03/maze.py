@@ -4,18 +4,18 @@ import tkinter.messagebox as tkm
 #maze_makerモジュールは迷路を生成するためのモジュール
 import maze_maker
 import sys
+import time
 
 
-
-global mx, my, build, canvas, root, cx, cy, times
+global mx, my, build, canvas, root, cx, cy, times, time_sta, time_end, tim
 times = 1
 
 root = tk.Tk() #ウィンドウを生成
 root.title("迷えるこうかとん") #タイトル名
 root.geometry("1500x900") #ウィンドウのサイズ
 def initmake():
-    global build, canvas, root, cx, cy, mx , my    
-
+    global build, canvas, root, cx, cy, mx , my, time_sta   
+    #time_sta = time.time()
     #キャンバスエリア
     canvas = tk.Canvas(root, width = 1500, height = 900, bg = "black")
 
@@ -103,6 +103,9 @@ def main_proc(key):
                 canvas.coords("tori0", cx, cy)     
     if (mx == 13):
         if (my == 7):
+            #time.sleep(1)
+            #time_end = time.time()
+            #tim = time_end - time_sta
             times += 1
             ret = tkm.askyesno("クリアしました", "もう一度遊びますか？")
             if ret == False:
@@ -110,7 +113,7 @@ def main_proc(key):
             else:
                 canvas.delete("all")
                 initmake()
-                
+#逆操作にする        
 def temp_proc(key):
     global cx, cy, mx, my, times
     if (key == "Up"):
@@ -139,6 +142,9 @@ def temp_proc(key):
                 canvas.coords("tori0", cx, cy)     
     if (mx == 13):
         if (my == 7):
+            #time.sleep(1)
+            #time_end = time.time()
+            #tim = time_end - time_sta
             times += 1
             ret = tkm.askyesno("クリアしました", "もう一度遊びますか？")
             if ret == False:
