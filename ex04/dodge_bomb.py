@@ -3,18 +3,24 @@ import pygame as pg
 import sys
 def main():
     pg.init()
-    scrn_sfc = pg.display.set_mode((1600, 900))
+    scrn_sfc = pg.display.set_mode((1500, 800))
     pg.display.set_caption("逃げろ!こうかとん")
-    screen = pg.display.get_surface()
+    #screen = pg.display.get_surface()
+    bg_sfc = pg.image.load("pg_bg.jpg")
+    bg_sfc = pg.transform.rotozoom(bg_sfc, 0, 1.0)
+    bg_rct = bg_sfc.get_rect()
+    bg_rct.center = 700, 400
     
-    tori_sfc = pg.image.load("pg_bg.jpg")
+    tori_sfc = pg.image.load("fig/6.png")
     tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
     tori_rct = tori_sfc.get_rect()
-    tori_rct.center = 700, 400
+    tori_rct.center = 900, 400
     while(1):
         pg.display.update()
         pg.time.wait(30)
+        scrn_sfc.blit(bg_sfc, bg_rct)
         scrn_sfc.blit(tori_sfc, tori_rct)
+        
         clock = pg.time.Clock()
         clock.tick(1000)
         
