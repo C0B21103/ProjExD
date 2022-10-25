@@ -3,7 +3,7 @@ import pygame as pg
 import sys
 def main():
     pg.init()
-    scrn_sfc = pg.display.set_mode((1000, 600))
+    scrn_sfc = pg.display.set_mode((1600, 900))
     pg.display.set_caption("逃げろ!こうかとん")
     screen = pg.display.get_surface()
     
@@ -15,7 +15,8 @@ def main():
         pg.display.update()
         pg.time.wait(30)
         scrn_sfc.blit(tori_sfc, tori_rct)
-
+        clock = pg.time.Clock()
+        clock.tick(1000)
         
         for event in pg.event.get():
             if event.type == QUIT:
