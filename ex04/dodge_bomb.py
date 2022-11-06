@@ -51,6 +51,7 @@ def main():
         
         
         #矢印キーによるこうかとんの移動
+        #こうかとんが画面外に出ないようにする
         pressed = pg.key.get_pressed()
         if ((pressed[K_UP]) and (tori_rct.centery > 50)):
             tori_rct.move_ip(0, -5)
@@ -60,6 +61,10 @@ def main():
             tori_rct.move_ip(-5, 0)
         elif ((pressed[K_RIGHT]) and (tori_rct.centerx < 1450)):
             tori_rct.move_ip(5, 0)
+        
+        #爆弾とこうかとんの衝突    
+        if tori_rct.colliderect(bomb_rct):
+            return
         
         #終了時
         clock.tick(1000)
