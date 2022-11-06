@@ -14,12 +14,13 @@ def main():
     bg_rct = bg_sfc.get_rect()
     #bg_rct.center = 700, 400
     
+    #こうかとんの描写
     tori_sfc = pg.image.load("fig/6.png")
     tori_sfc = pg.transform.rotozoom(tori_sfc, 0, 2.0)
     tori_rct = tori_sfc.get_rect()
     tori_rct.center = 900, 400
     
-
+    #爆弾の描写
     bomb_sfc = pg.Surface((100, 100))
     bomb_sfc.set_colorkey((0, 0, 0))
     pg.draw.circle(bomb_sfc, (255, 0, 0), (10, 10), 10)
@@ -27,6 +28,9 @@ def main():
     bomb_rct.centerx = random.randint(0, scrn_rct.width)
     bomb_rct.centery = random.randint(0, scrn_rct.height)
     clock = pg.time.Clock()
+    
+    vx, vy = +1, +1
+    
     while(1):
         pg.display.update()
         #pg.time.wait(30)
@@ -36,15 +40,25 @@ def main():
         
         scrn_sfc.blit(bg_sfc, bg_rct)
         scrn_sfc.blit(tori_sfc, tori_rct)
+        #爆弾の移動
+        #画面外に出ないように制御
+        if((bomb_rct.left < scrn_rct.left) or (scrn_rct.right < bomb_rct.right)):
+            vx *= -1
+        if((bomb_rct.top < scrn_rct.top) or (scrn_rct.bottom < bomb_rct.bottom)):
+            vy *= -1
+        bomb_rct.move_ip(vx, vy)
         scrn_sfc.blit(bomb_sfc, bomb_rct)
+        
+        
+        #矢印キーによるこうかとんの移動
         pressed = pg.key.get_pressed()
-        if pressed[K_UP]:
+        if ((pressed[K_UP]) and (tori_rct.centery > 50)):
             tori_rct.move_ip(0, -5)
-        elif pressed[K_DOWN]:
+        elif ((pressed[K_DOWN]) and (tori_rct.centery < 750)):
             tori_rct.move_ip(0, 5)
-        elif pressed[K_LEFT]:
+        elif ((pressed[K_LEFT]) and (tori_rct.centerx > 50)):
             tori_rct.move_ip(-5, 0)
-        elif pressed[K_RIGHT]:
+        elif ((pressed[K_RIGHT]) and (tori_rct.centerx < 1450)):
             tori_rct.move_ip(5, 0)
         
         #終了時
@@ -63,4 +77,7 @@ def main():
     
     
 if __name__ == "__main__":
+    pg.init()
     main()
+    pg.quit()
+    sys.exit()
