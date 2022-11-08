@@ -4,9 +4,11 @@ from pygame.locals import *
 from pygame.time import Clock
 from random import randint
 
+#結果のウィンドウを表示する
 def result():
-    font4 = pg.font.SysFont("hg正楷書体pro", 40)        
+          
     pg.init()
+    font4 = pg.font.SysFont("hg正楷書体pro", 40)  
     pg.display.set_mode((700, 400))
     screen2 = pg.display.get_surface()
     pg.display.set_caption("結果")
@@ -15,16 +17,20 @@ def result():
    
     while(1):
         screen2.fill((255,255,255))
+        
+        #何回たたいたのかを表示する
         text4 = font4.render('点数 : {}点'.format(score), True, (0, 0, 0))
         screen2.blit(text4, [200, 100] )
         
         
         
-        
+        #10回以上たたいた時とそうでないときでクリアしたかどうかを条件分岐させる
         if score < 10:
+            #クリアしなかったときの表示
             text5 = font4.render('ゲームオーバー', True, (0, 0, 0))
             screen2.blit(text5, [200, 200] )
         else :
+            #クリアしたときの表示
             button = pg.Rect(200, 300, 240, 40) 
             text7 = font4.render('次のレベルへ', True, (0, 0, 0))
             pg.draw.rect(screen2, (0, 255, 0), button)
@@ -38,9 +44,10 @@ def result():
             if event.type == QUIT:
                 pg.quit()
                 sys.exit()
+            #次のレベルへのbuttonが押されたとき
             if event.type == pg.MOUSEBUTTONDOWN:
                 if button.collidepoint(event.pos):
-                    print("button was pressed")
+                    #print("button was pressed")
                     return
         pg.display.update()
         
@@ -73,10 +80,11 @@ def create(level):
     text1 = font1.render("Click!", True, (204, 102, 112))
     text2 = font2.render("+1", True, (0, 0, 0)) #スコアしたときに表示するテキスト
     
-    
+    #画像の初期位置
     imgx = 750
     imgy = 400
     
+    #画像の移動する速さ
     vx = randint(-level, level)
     vy = randint(-level, level)
     
@@ -165,16 +173,19 @@ def create(level):
         #プログラムは一秒毎に30フレームを超える速度で実行されないようにする
         cl.tick(30)
         
+        #残り時間が0になったら終了する
         if rest == 0:
             break
         
 
 
 def main():
+    #難易度を表す変数levelの初期化
     level = 1
     while(1):
         create(level)
         result()
+        #以下はクリアしたときにのみ実行される
         level += 1
         
         
